@@ -4,28 +4,27 @@
 
         <jet-banner />
 
-        <div class="md:flex md:flex-col">
-            <div class="md:h-screen md:flex md:flex-col">
-                <nav class="md:flex md:flex-shrink-0">
-                    <div class="bg-indigo-900 md:flex-shrink-0 md:w-56 px-6 py-4 flex items-center justify-between md:justify-center">
-                        <!-- Logo -->
-                        <div class="flex-shrink-0 flex items-center">
-                            <Link :href="route('dashboard')">
-                                <jet-application-mark class="block h-9 w-auto" />
-                            </Link>
+        <div class="min-h-screen bg-gray-100">
+            <nav class="bg-white border-b border-gray-100">
+                <!-- Primary Navigation Menu -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between h-16">
+                        <div class="flex">
+                            <!-- Logo -->
+                            <div class="flex-shrink-0 flex items-center">
+                                <Link :href="route('dashboard')">
+                                    <jet-application-mark class="block h-9 w-auto" />
+                                </Link>
+                            </div>
+
+                            <!-- Navigation Links -->
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                                    Dashboard
+                                </jet-nav-link>
+                            </div>
                         </div>
-                        <!-- Hamburger -->
-                        <div class="-mr-2 flex items-center sm:hidden">
-                            <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
-                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                    <path :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-md flex justify-between items-center">
-                        <div class="mt-1 mr-4">ZUUPEE Corporation</div>
+
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <div class="ml-3 relative">
                                 <!-- Teams Dropdown -->
@@ -127,102 +126,107 @@
                                 </jet-dropdown>
                             </div>
                         </div>
+
+                        <!-- Hamburger -->
+                        <div class="-mr-2 flex items-center sm:hidden">
+                            <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
+                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                    <path :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    <path :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <!-- Responsive Navigation Menu -->
-                    <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
-                        <div class="pt-2 pb-3 space-y-1">
-                            <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                Dashboard
+                </div>
+
+                <!-- Responsive Navigation Menu -->
+                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
+                    <div class="pt-2 pb-3 space-y-1">
+                        <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                            Dashboard
+                        </jet-responsive-nav-link>
+                    </div>
+
+                    <!-- Responsive Settings Options -->
+                    <div class="pt-4 pb-1 border-t border-gray-200">
+                        <div class="flex items-center px-4">
+                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
+                                <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
+                            </div>
+
+                            <div>
+                                <div class="font-medium text-base text-gray-800">{{ $page.props.user.name }}</div>
+                                <div class="font-medium text-sm text-gray-500">{{ $page.props.user.email }}</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 space-y-1">
+                            <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
+                                Profile
                             </jet-responsive-nav-link>
-                        </div>
 
-                        <!-- Responsive Settings Options -->
-                        <div class="pt-4 pb-1 border-t border-gray-200">
-                            <div class="flex items-center px-4">
-                                <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
-                                    <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
+                            <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
+                                API Tokens
+                            </jet-responsive-nav-link>
+
+                            <!-- Authentication -->
+                            <form method="POST" @submit.prevent="logout">
+                                <jet-responsive-nav-link as="button">
+                                    Log Out
+                                </jet-responsive-nav-link>
+                            </form>
+
+                            <!-- Team Management -->
+                            <template v-if="$page.props.jetstream.hasTeamFeatures">
+                                <div class="border-t border-gray-200"></div>
+
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    Manage Team
                                 </div>
 
-                                <div>
-                                    <div class="font-medium text-base text-gray-800">{{ $page.props.user.name }}</div>
-                                    <div class="font-medium text-sm text-gray-500">{{ $page.props.user.email }}</div>
+                                <!-- Team Settings -->
+                                <jet-responsive-nav-link :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
+                                    Team Settings
+                                </jet-responsive-nav-link>
+
+                                <jet-responsive-nav-link :href="route('teams.create')" :active="route().current('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
+                                    Create New Team
+                                </jet-responsive-nav-link>
+
+                                <div class="border-t border-gray-200"></div>
+
+                                <!-- Team Switcher -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    Switch Teams
                                 </div>
-                            </div>
 
-                            <div class="mt-3 space-y-1">
-                                <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                                    Profile
-                                </jet-responsive-nav-link>
-
-                                <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
-                                    API Tokens
-                                </jet-responsive-nav-link>
-
-                                <!-- Authentication -->
-                                <form method="POST" @submit.prevent="logout">
-                                    <jet-responsive-nav-link as="button">
-                                        Log Out
-                                    </jet-responsive-nav-link>
-                                </form>
-
-                                <!-- Team Management -->
-                                <template v-if="$page.props.jetstream.hasTeamFeatures">
-                                    <div class="border-t border-gray-200"></div>
-
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
-                                        Manage Team
-                                    </div>
-
-                                    <!-- Team Settings -->
-                                    <jet-responsive-nav-link :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
-                                        Team Settings
-                                    </jet-responsive-nav-link>
-
-                                    <jet-responsive-nav-link :href="route('teams.create')" :active="route().current('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
-                                        Create New Team
-                                    </jet-responsive-nav-link>
-
-                                    <div class="border-t border-gray-200"></div>
-
-                                    <!-- Team Switcher -->
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
-                                        Switch Teams
-                                    </div>
-
-                                    <template v-for="team in $page.props.user.all_teams" :key="team.id">
-                                        <form @submit.prevent="switchToTeam(team)">
-                                            <jet-responsive-nav-link as="button">
-                                                <div class="flex items-center">
-                                                    <svg v-if="team.id == $page.props.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                    <div>{{ team.name }}</div>
-                                                </div>
-                                            </jet-responsive-nav-link>
-                                        </form>
-                                    </template>
+                                <template v-for="team in $page.props.user.all_teams" :key="team.id">
+                                    <form @submit.prevent="switchToTeam(team)">
+                                        <jet-responsive-nav-link as="button">
+                                            <div class="flex items-center">
+                                                <svg v-if="team.id == $page.props.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                <div>{{ team.name }}</div>
+                                            </div>
+                                        </jet-responsive-nav-link>
+                                    </form>
                                 </template>
-                            </div>
+                            </template>
                         </div>
                     </div>
-                </nav>
-                <!-- Page Content -->
-                <main class="md:flex md:flex-grow md:overflow-hidden">
-                    <div class="hidden md:block bg-indigo-800 flex-shrink-0 w-56 p-5 overflow-y-auto">
-                        <div class="mb-4">
-                            <a href="http://demo.inertiajs.com/" class="flex items-center group py-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-4 h-4 mr-2 fill-indigo-400 group-hover:fill-white"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"></path></svg>
-                                <div class="text-indigo-300 group-hover:text-white">
-                                    <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                        Dashboard
-                                    </jet-nav-link>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="md:flex-1 px-4 py-8 md:p-12 md:overflow-y-auto">
-                        <slot></slot>
-                    </div>
-                </main>
-            </div>
+                </div>
+            </nav>
+
+            <!-- Page Heading -->
+            <header class="bg-white shadow" v-if="$slots.header">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <slot name="header"></slot>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main>
+                <slot></slot>
+            </main>
         </div>
     </div>
 </template>

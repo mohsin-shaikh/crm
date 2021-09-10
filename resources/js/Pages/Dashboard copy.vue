@@ -18,8 +18,7 @@
 
 <script>
     import { defineComponent } from 'vue'
-    // import AdminLayout from '@/Layouts/AdminLayout.vue'
-     import AppLayout from '@/Layouts/AppLayout.vue'
+    import AppLayout from '@/Layouts/AppLayout.vue'
     import Welcome from '@/Jetstream/Welcome.vue'
 
     export default defineComponent({
