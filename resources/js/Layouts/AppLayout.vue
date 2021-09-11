@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-md flex justify-between items-center">
-                        <div class="mt-1 mr-4">ZUUPEE Corporation</div>
+                        <div class="mt-1 mr-4">{{ $page.props.user.account.name }}</div>
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <div class="ml-3 relative">
                                 <!-- Teams Dropdown -->
