@@ -214,6 +214,7 @@
                 </main>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -261,15 +262,15 @@
                     preserveState: false
                 })
             },
-
             logout() {
                 this.$inertia.post(route('logout'));
             },
-
             url() {
                 return location.pathname.substr(1)
             },
-
+            hideDropdownMenus() {
+                this.showUserMenu = false
+            },
         }
     })
 </script>

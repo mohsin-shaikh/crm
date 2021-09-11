@@ -1,14 +1,14 @@
 <template>
   <button type="button" @click="show = true">
     <slot />
-    <portal v-if="show" to="dropdown">
-      <div>
-        <div style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 99998; background: black; opacity: .2" @click="show = false" />
+    <teleport to="body">
+      <div v-if="show">
+        <div style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 99998; background: black; opacity: .2" @click="show = false"></div>
         <div ref="dropdown" style="position: absolute; z-index: 99999;" @click.stop="show = autoClose ? false : true">
           <slot name="dropdown" />
         </div>
       </div>
-    </portal>
+    </teleport>
   </button>
 </template>
 
