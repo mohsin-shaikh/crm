@@ -62,13 +62,11 @@
 
 <script>
 import Icon from '@/Shared/Icon'
-// import Layout from '@/Shared/Layout'
+import AppLayout from '@/Layouts/AppLayout'
 import mapValues from 'lodash/mapValues'
 import pickBy from 'lodash/pickBy'
 import SearchFilter from '@/Shared/SearchFilter'
 import throttle from 'lodash/throttle'
-
-import AppLayout from '@/Layouts/AppLayout.vue'
 import { Link } from '@inertiajs/inertia-vue3';
 
 export default {
