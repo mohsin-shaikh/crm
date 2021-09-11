@@ -28,5 +28,17 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/organizations', function () {
+    return Inertia::render('Dashboard');
+})->name('organizations');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/contacts', function () {
+    return Inertia::render('Dashboard');
+})->name('contacts');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/reports', function () {
+    return Inertia::render('Dashboard');
+})->name('reports');
+
 // Dashboard
 // Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::class, 'index'])->name('dashboard');
