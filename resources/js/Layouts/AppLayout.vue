@@ -208,27 +208,21 @@
                 <main class="md:flex md:flex-grow md:overflow-hidden">
                     <div class="hidden md:block bg-indigo-800 flex-shrink-0 w-56 p-5 overflow-y-auto">
                         <div class="mb-4">
-                            <a href="http://demo.inertiajs.com/" class="flex items-center group py-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-4 h-4 mr-2 fill-indigo-400 group-hover:fill-white"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"></path></svg>
-                                <div class="text-indigo-300 group-hover:text-white">
-                                    Dashboard
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mb-4">
-                            <Link href="route('dashboard')" class="flex items-center group py-3">
+                            <Link :href="route('dashboard')" :active="route().current('dashboard')" class="flex items-center group py-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-4 h-4 mr-2 fill-indigo-400 group-hover:fill-white"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"></path></svg>
                                 <div class="text-indigo-300 group-hover:text-white">
                                     Dashboard
                                 </div>
                             </Link>
                         </div>
-                        <div class="mb-4">
+                        <!-- <div class="mb-4">
                             <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')" class="flex items-center group py-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-4 h-4 mr-2 fill-indigo-400 group-hover:fill-white"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"></path></svg>
-                                Dashboard
+                                <div class="text-indigo-300 group-hover:text-white">
+                                    Dashboard
+                                </div>
                             </jet-nav-link>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="md:flex-1 px-4 py-8 md:p-12 md:overflow-y-auto">
                         <slot></slot>
