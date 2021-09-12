@@ -1,8 +1,12 @@
 .btn-indigo {
     @apply px-6 py-3 rounded bg-indigo-600 text-white text-sm font-bold whitespace-nowrap;
 
-    &:hover,&:focus {@apply bg-yellow-500}
+    &:hover, &:focus {@apply bg-yellow-500}
 }
+
+/* .btn-indigo:hover,.btn-indigo:focus {
+    @apply bg-yellow-500
+} */
 
 .btn-spinner,
 .btn-spinner:after {

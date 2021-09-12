@@ -806,11 +806,9 @@ select {
 	outline: 1px auto -webkit-focus-ring-color;
 }
 
-input, select, textarea, button, div, a {
-  &:focus, &:active {
+input:focus, input:active, select:focus, select:active, textarea:focus, textarea:active, button:focus, button:active, div:focus, div:active, a:focus, a:active {
     outline: none;
   }
-}
 
 /* Components */
 
@@ -1165,12 +1163,16 @@ input, select, textarea, button, div, a {
 	font-weight: 700;
 	--tw-text-opacity: 1;
 	color: rgba(255, 255, 255, var(--tw-text-opacity));
-
-    &:hover, &:focus {
-		--tw-bg-opacity: 1;
-		background-color: rgba(245, 158, 11, var(--tw-bg-opacity));
-	}
 }
+
+.btn-indigo:hover, .btn-indigo:focus {
+	--tw-bg-opacity: 1;
+	background-color: rgba(245, 158, 11, var(--tw-bg-opacity));
+}
+
+/* .btn-indigo:hover,.btn-indigo:focus {
+    @apply bg-yellow-500
+} */
 
 .btn-spinner,
 .btn-spinner:after {
@@ -1240,43 +1242,30 @@ input, select, textarea, button, div, a {
 	line-height: 1.5;
 	--tw-text-opacity: 1;
 	color: rgba(55, 65, 81, var(--tw-text-opacity));
+}
 
-  &:focus, &.focus {
-		--tw-border-opacity: 1;
-		border-color: rgba(101, 116, 205, var(--tw-border-opacity));
-	}
-
-  &:focus,
-  &.focus {
+.form-input:focus, .form-input.focus, .form-textarea:focus, .form-textarea.focus, .form-select:focus, .form-select.focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(101, 116, 205, var(--tw-border-opacity));
     box-shadow: 0 0 0 1px #6574cd;
-  }
+}
 
-  &::-moz-placeholder {
-		--tw-text-opacity: 1;
-		color: rgba(107, 114, 128, var(--tw-text-opacity));
-	}
+.form-input::-moz-placeholder, .form-textarea::-moz-placeholder, .form-select::-moz-placeholder {
+	--tw-text-opacity: 1;
+	color: rgba(107, 114, 128, var(--tw-text-opacity));
+	opacity: 1;
+}
 
-  &:-ms-input-placeholder {
-		--tw-text-opacity: 1;
-		color: rgba(107, 114, 128, var(--tw-text-opacity));
-	}
+.form-input:-ms-input-placeholder, .form-textarea:-ms-input-placeholder, .form-select:-ms-input-placeholder {
+	--tw-text-opacity: 1;
+	color: rgba(107, 114, 128, var(--tw-text-opacity));
+	opacity: 1;
+}
 
-  &::placeholder {
-		--tw-text-opacity: 1;
-		color: rgba(107, 114, 128, var(--tw-text-opacity));
-	}
-
-  &::-moz-placeholder {
-		opacity: 1;
-	}
-
-  &:-ms-input-placeholder {
-		opacity: 1;
-	}
-
-  &::placeholder {
-		opacity: 1;
-	}
+.form-input::placeholder, .form-textarea::placeholder, .form-select::placeholder {
+	--tw-text-opacity: 1;
+	color: rgba(107, 114, 128, var(--tw-text-opacity));
+	opacity: 1;
 }
 
 .form-select {
@@ -1286,10 +1275,10 @@ input, select, textarea, button, div, a {
   background-size: 0.7rem;
   background-repeat: no-repeat;
   background-position: right 0.7rem center;
+}
 
-  &::-ms-expand {
-		opacity: 0;
-	}
+.form-select::-ms-expand {
+	opacity: 0;
 }
 
 .form-error {
@@ -1303,11 +1292,11 @@ input, select, textarea, button, div, a {
 .form-input.error, .form-textarea.error, .form-select.error {
 	--tw-border-opacity: 1;
 	border-color: rgba(220, 38, 38, var(--tw-border-opacity));
+}
 
-  &:focus {
+.form-input.error:focus, .form-textarea.error:focus, .form-select.error:focus {
     box-shadow: 0 0 0 1px #dc2626;
   }
-}
 
 /* Utilities */
 
