@@ -8,8 +8,8 @@
             class="form-input"
             :class="{ error: error }"
             :type="type"
-            :value="value"
-            @input="$emit('input', $event.target.value)"
+            :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
         />
         <div v-if="error" class="form-error">{{ error }}</div>
     </div>
@@ -31,7 +31,7 @@ export default {
             type: String,
             default: "text",
         },
-        value: String,
+        modelValue: String,
         label: String,
         error: String,
     },

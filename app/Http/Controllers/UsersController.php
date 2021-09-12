@@ -41,21 +41,23 @@ class UsersController extends Controller
     public function store()
     {
         Request::validate([
-            'first_name' => ['required', 'max:50'],
-            'last_name' => ['required', 'max:50'],
+            // 'first_name' => ['required', 'max:50'],
+            // 'last_name' => ['required', 'max:50'],
+            'name' => ['required', 'max:50'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')],
             'password' => ['nullable'],
             'owner' => ['required', 'boolean'],
-            'photo' => ['nullable', 'image'],
+            // 'photo' => ['nullable', 'image'],
         ]);
 
         Auth::user()->account->users()->create([
-            'first_name' => Request::get('first_name'),
-            'last_name' => Request::get('last_name'),
+            // 'first_name' => Request::get('first_name'),
+            // 'last_name' => Request::get('last_name'),
+            'name' => Request::get('name'),
             'email' => Request::get('email'),
             'password' => Request::get('password'),
             'owner' => Request::get('owner'),
-            'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
+            // 'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
         ]);
 
         return Redirect::route('users')->with('success', 'User created.');

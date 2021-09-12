@@ -35,7 +35,7 @@ class User extends Authenticatable implements AuthenticatableContract, Authoriza
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'owner'
     ];
 
     /**
@@ -81,10 +81,10 @@ class User extends Authenticatable implements AuthenticatableContract, Authoriza
     //     return $this->first_name.' '.$this->name;
     // }
 
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
-    }
+    // public function setPasswordAttribute($password)
+    // {
+    //     $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
+    // }
 
     public function photoUrl(array $attributes)
     {
@@ -93,10 +93,10 @@ class User extends Authenticatable implements AuthenticatableContract, Authoriza
         }
     }
 
-    public function isDemoUser()
-    {
-        return $this->email === 'johndoe@example.com';
-    }
+    // public function isDemoUser()
+    // {
+    //     return $this->email === 'johndoe@example.com';
+    // }
 
     public function scopeOrderByName($query)
     {
