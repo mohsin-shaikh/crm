@@ -7,7 +7,7 @@
                     :href="route('users')"
                     >Users</Link
                 >
-                <span class="text-indigo-400 font-medium">/</span>
+                <span class="text-indigo-400 font-medium"> / </span>
                 {{ form.name }}
             </h1>
             <!-- <img
