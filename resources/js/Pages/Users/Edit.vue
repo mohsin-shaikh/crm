@@ -113,7 +113,7 @@
             </template>
         </confirmation-modal>
         <!-- Restore User Confirmation Modal -->
-        <confirmation-modal :show="confirmingUserRestoration" @close="confirmingUserRestoration = false">
+        <dialog-modal :show="confirmingUserRestoration" @close="confirmingUserRestoration = false">
             <template #title>
                 Restore User
             </template>
@@ -127,11 +127,11 @@
                     Cancel
                 </secondary-button>
 
-                <danger-button class="ml-2" @click="restoreUser" :class="{ 'opacity-25': restoreForm.processing }" :disabled="restoreForm.processing">
+                <jet-button class="ml-2" @click="restoreUser" :class="{ 'opacity-25': restoreForm.processing }" :disabled="restoreForm.processing">
                     Restore User
-                </danger-button>
+                </jet-button>
             </template>
-        </confirmation-modal>
+        </dialog-modal>
     </app-layout>
 </template>
 
@@ -143,6 +143,8 @@ import TextInput from "@/Shared/TextInput";
 import FileInput from "@/Shared/FileInput";
 import TrashedMessage from "@/Shared/TrashedMessage";
 import { Link } from "@inertiajs/inertia-vue3";
+import DialogModal from '@/Jetstream/DialogModal.vue'
+import JetButton from '@/Jetstream/Button.vue'
 import ConfirmationModal from '@/Jetstream/ConfirmationModal.vue'
 import DangerButton from '@/Jetstream/DangerButton.vue'
 import SecondaryButton from '@/Jetstream/SecondaryButton.vue'
@@ -157,8 +159,10 @@ export default {
         TrashedMessage,
         Link,
         ConfirmationModal,
+        DialogModal,
         DangerButton,
         SecondaryButton,
+        JetButton
     },
     props: {
         errors: Object,
