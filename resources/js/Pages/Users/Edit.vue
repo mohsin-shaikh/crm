@@ -16,7 +16,7 @@
                 :src="user.photo"
             /> -->
         </div>
-        <trashed-message v-if="current_user.deleted_at" class="mb-6" @restore="restore">
+        <trashed-message v-if="current_user.deleted_at" class="mb-6" @restore="confirmUserRestoration">
             This user has been deleted.
         </trashed-message>
         <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
@@ -79,7 +79,7 @@
                         class="text-red-600 hover:underline"
                         tabindex="-1"
                         type="button"
-                        @click="destroy"
+                        @click="confirmUserDeletion"
                     >
                         Delete User
                     </button>
@@ -92,6 +92,46 @@
                 </div>
             </form>
         </div>
+        <!-- Delete User Confirmation Modal -->
+        <confirmation-modal :show="confirmingUserDeletion" @close="confirmingUserDeletion = false">
+            <template #title>
+                Delete User
+            </template>
+
+            <template #content>
+                Are you sure you want to delete this user?
+            </template>
+
+            <template #footer>
+                <secondary-button @click="confirmingUserDeletion = false">
+                    Cancel
+                </secondary-button>
+
+                <danger-button class="ml-2" @click="deleteUser" :class="{ 'opacity-25': deleteForm.processing }" :disabled="deleteForm.processing">
+                    Delete User
+                </danger-button>
+            </template>
+        </confirmation-modal>
+        <!-- Restore User Confirmation Modal -->
+        <confirmation-modal :show="confirmingUserRestoration" @close="confirmingUserRestoration = false">
+            <template #title>
+                Restore User
+            </template>
+
+            <template #content>
+                Are you sure you want to restore this user?
+            </template>
+
+            <template #footer>
+                <secondary-button @click="confirmingUserRestoration = false">
+                    Cancel
+                </secondary-button>
+
+                <danger-button class="ml-2" @click="restoreUser" :class="{ 'opacity-25': restoreForm.processing }" :disabled="restoreForm.processing">
+                    Restore User
+                </danger-button>
+            </template>
+        </confirmation-modal>
     </app-layout>
 </template>
 
@@ -103,6 +143,9 @@ import TextInput from "@/Shared/TextInput";
 import FileInput from "@/Shared/FileInput";
 import TrashedMessage from "@/Shared/TrashedMessage";
 import { Link } from "@inertiajs/inertia-vue3";
+import ConfirmationModal from '@/Jetstream/ConfirmationModal.vue'
+import DangerButton from '@/Jetstream/DangerButton.vue'
+import SecondaryButton from '@/Jetstream/SecondaryButton.vue'
 
 export default {
     components: {
@@ -113,6 +156,9 @@ export default {
         FileInput,
         TrashedMessage,
         Link,
+        ConfirmationModal,
+        DangerButton,
+        SecondaryButton,
     },
     props: {
         errors: Object,
@@ -131,6 +177,11 @@ export default {
                 owner: this.current_user.owner,
                 // photo: null,
             },
+
+            confirmingUserDeletion: false,
+            deleteForm: this.$inertia.form(),
+            confirmingUserRestoration: false,
+            restoreForm: this.$inertia.form(),
         };
     },
     methods: {
@@ -156,15 +207,21 @@ export default {
                 },
             });
         },
-        destroy() {
-            if (confirm("Are you sure you want to delete this user?")) {
-                this.$inertia.delete(this.route("users.destroy", this.current_user.id));
-            }
+        confirmUserDeletion() {
+            this.confirmingUserDeletion = true
         },
-        restore() {
-            if (confirm("Are you sure you want to restore this user?")) {
-                this.$inertia.put(this.route("users.restore", this.current_user.id));
-            }
+        deleteUser() {
+            this.deleteForm.delete(this.route("users.destroy", this.current_user.id), {
+                onFinish: () => (this.confirmingUserDeletion = false),
+            });
+        },
+        confirmUserRestoration() {
+            this.confirmingUserRestoration = true
+        },
+        restoreUser() {
+            this.restoreForm.put(this.route("users.restore", this.current_user.id), {
+                onFinish: () => (this.confirmingUserRestoration = false),
+            });
         },
     },
 };

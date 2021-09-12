@@ -23163,6 +23163,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_FileInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/FileInput */ "./resources/js/Shared/FileInput.vue");
 /* harmony import */ var _Shared_TrashedMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Shared/TrashedMessage */ "./resources/js/Shared/TrashedMessage.vue");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Jetstream_ConfirmationModal_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/ConfirmationModal.vue */ "./resources/js/Jetstream/ConfirmationModal.vue");
+/* harmony import */ var _Jetstream_DangerButton_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Jetstream/DangerButton.vue */ "./resources/js/Jetstream/DangerButton.vue");
+/* harmony import */ var _Jetstream_SecondaryButton_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Jetstream/SecondaryButton.vue */ "./resources/js/Jetstream/SecondaryButton.vue");
+
+
+
 
 
 
@@ -23178,7 +23184,10 @@ __webpack_require__.r(__webpack_exports__);
     TextInput: _Shared_TextInput__WEBPACK_IMPORTED_MODULE_3__["default"],
     FileInput: _Shared_FileInput__WEBPACK_IMPORTED_MODULE_4__["default"],
     TrashedMessage: _Shared_TrashedMessage__WEBPACK_IMPORTED_MODULE_5__["default"],
-    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__.Link
+    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__.Link,
+    ConfirmationModal: _Jetstream_ConfirmationModal_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    DangerButton: _Jetstream_DangerButton_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    SecondaryButton: _Jetstream_SecondaryButton_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   props: {
     errors: Object,
@@ -23196,7 +23205,11 @@ __webpack_require__.r(__webpack_exports__);
         password: this.current_user.password,
         owner: this.current_user.owner // photo: null,
 
-      }
+      },
+      confirmingUserDeletion: false,
+      deleteForm: this.$inertia.form(),
+      confirmingUserRestoration: false,
+      restoreForm: this.$inertia.form()
     };
   },
   methods: {
@@ -23227,15 +23240,29 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    destroy: function destroy() {
-      if (confirm("Are you sure you want to delete this user?")) {
-        this.$inertia["delete"](this.route("users.destroy", this.current_user.id));
-      }
+    confirmUserDeletion: function confirmUserDeletion() {
+      this.confirmingUserDeletion = true;
     },
-    restore: function restore() {
-      if (confirm("Are you sure you want to restore this user?")) {
-        this.$inertia.put(this.route("users.restore", this.current_user.id));
-      }
+    deleteUser: function deleteUser() {
+      var _this2 = this;
+
+      this.deleteForm["delete"](this.route("users.destroy", this.current_user.id), {
+        onFinish: function onFinish() {
+          return _this2.confirmingUserDeletion = false;
+        }
+      });
+    },
+    confirmUserRestoration: function confirmUserRestoration() {
+      this.confirmingUserRestoration = true;
+    },
+    restoreUser: function restoreUser() {
+      var _this3 = this;
+
+      this.restoreForm.put(this.route("users.restore", this.current_user.id), {
+        onFinish: function onFinish() {
+          return _this3.confirmingUserRestoration = false;
+        }
+      });
     }
   }
 });
@@ -31026,6 +31053,22 @@ var _hoisted_14 = {
 
 var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Update User");
 
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete User ");
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete this user? ");
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete User ");
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Restore User ");
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to restore this user? ");
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Restore User ");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
 
@@ -31036,6 +31079,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_select_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("select-input");
 
   var _component_loading_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("loading-button");
+
+  var _component_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("secondary-button");
+
+  var _component_danger_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("danger-button");
+
+  var _component_confirmation_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("confirmation-modal");
 
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
@@ -31060,7 +31109,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <img\n                v-if=\"user.photo\"\n                class=\"block w-8 h-8 rounded-full ml-4\"\n                :src=\"user.photo\"\n            /> ")]), $props.current_user.deleted_at ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_trashed_message, {
         key: 0,
         "class": "mb-6",
-        onRestore: $options.restore
+        onRestore: $options.confirmUserRestoration
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_5];
@@ -31125,7 +31174,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         tabindex: "-1",
         type: "button",
         onClick: _cache[4] || (_cache[4] = function () {
-          return $options.destroy && $options.destroy.apply($options, arguments);
+          return $options.confirmUserDeletion && $options.confirmUserDeletion.apply($options, arguments);
         })
       }, " Delete User ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_loading_button, {
         loading: $data.sending,
@@ -31142,7 +31191,99 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["loading"])])], 32
       /* HYDRATE_EVENTS */
-      )])];
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delete User Confirmation Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_confirmation_modal, {
+        show: $data.confirmingUserDeletion,
+        onClose: _cache[7] || (_cache[7] = function ($event) {
+          return $data.confirmingUserDeletion = false;
+        })
+      }, {
+        title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_16];
+        }),
+        content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_17];
+        }),
+        footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_secondary_button, {
+            onClick: _cache[6] || (_cache[6] = function ($event) {
+              return $data.confirmingUserDeletion = false;
+            })
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [_hoisted_18];
+            }),
+            _: 1
+            /* STABLE */
+
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_danger_button, {
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["ml-2", {
+              'opacity-25': $data.deleteForm.processing
+            }]),
+            onClick: $options.deleteUser,
+            disabled: $data.deleteForm.processing
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [_hoisted_19];
+            }),
+            _: 1
+            /* STABLE */
+
+          }, 8
+          /* PROPS */
+          , ["onClick", "class", "disabled"])];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["show"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Restore User Confirmation Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_confirmation_modal, {
+        show: $data.confirmingUserRestoration,
+        onClose: _cache[9] || (_cache[9] = function ($event) {
+          return $data.confirmingUserRestoration = false;
+        })
+      }, {
+        title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_20];
+        }),
+        content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_21];
+        }),
+        footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_secondary_button, {
+            onClick: _cache[8] || (_cache[8] = function ($event) {
+              return $data.confirmingUserRestoration = false;
+            })
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [_hoisted_22];
+            }),
+            _: 1
+            /* STABLE */
+
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_danger_button, {
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["ml-2", {
+              'opacity-25': $data.restoreForm.processing
+            }]),
+            onClick: $options.restoreUser,
+            disabled: $data.restoreForm.processing
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [_hoisted_23];
+            }),
+            _: 1
+            /* STABLE */
+
+          }, 8
+          /* PROPS */
+          , ["onClick", "class", "disabled"])];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["show"])];
     }),
     _: 1
     /* STABLE */
@@ -31228,7 +31369,7 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_12 = [_hoisted_9, _hoisted_10, _hoisted_11];
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Create", -1
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Create ", -1
 /* HOISTED */
 );
 

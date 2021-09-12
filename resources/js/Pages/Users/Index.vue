@@ -21,7 +21,7 @@
         </select>
       </search-filter>
       <Link class="btn-indigo" :href="route('users.create')">
-        <span>Create</span>
+        <span>Create </span>
         <span class="hidden md:inline">User</span>
       </Link>
     </div>
