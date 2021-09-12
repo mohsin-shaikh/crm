@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <app-layout title="Create User">
     <h1 class="mb-8 font-bold text-3xl">
       <Link class="text-indigo-400 hover:text-indigo-600" :href="route('users')">Users</Link>
       <span class="text-indigo-400 font-medium"> / </span>Create
@@ -47,7 +47,7 @@
         </div>
       </form>
     </div>
-  </div>
+  </app-layout>
 </template>
 
 <script>
@@ -59,9 +59,8 @@ import FileInput from "@/Shared/FileInput";
 import { Link } from "@inertiajs/inertia-vue3";
 
 export default {
-  metaInfo: { title: "Create User" },
-  layout: AppLayout,
   components: {
+    AppLayout,
     LoadingButton,
     SelectInput,
     TextInput,
