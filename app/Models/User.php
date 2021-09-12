@@ -16,6 +16,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements AuthenticatableContract, AuthorizableContract
 {
@@ -81,10 +82,10 @@ class User extends Authenticatable implements AuthenticatableContract, Authoriza
     //     return $this->first_name.' '.$this->name;
     // }
 
-    // public function setPasswordAttribute($password)
-    // {
-    //     $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
-    // }
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
+    }
 
     public function photoUrl(array $attributes)
     {

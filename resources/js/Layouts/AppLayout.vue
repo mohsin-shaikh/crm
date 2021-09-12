@@ -210,6 +210,7 @@
                     <main-menu :url="url()" class="hidden md:block bg-indigo-800 flex-shrink-0 w-56 p-5 overflow-y-auto"  />
                     <div class="md:flex-1 px-4 py-8 md:p-12 md:overflow-y-auto">
                         <jet-banner />
+                        <flash-messages />
                         <slot />
                     </div>
                 </main>
@@ -230,6 +231,7 @@
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import Icon from '@/Shared/Icon.vue'
     import MainMenu from '@/Shared/MainMenu.vue'
+    import FlashMessages from '@/Shared/FlashMessages.vue'
 
     export default defineComponent({
         props: {
@@ -247,11 +249,13 @@
             Link,
             Icon,
             MainMenu,
+            FlashMessages,
         },
 
         data() {
             return {
                 showingNavigationDropdown: false,
+                accounts: null
             }
         },
 

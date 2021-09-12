@@ -66,13 +66,14 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         return Inertia::render('Users/Edit', [
-            'user' => [
+            'current_user' => [
                 'id' => $user->id,
-                'first_name' => $user->first_name,
-                'last_name' => $user->last_name,
+                // 'first_name' => $user->first_name,
+                // 'last_name' => $user->last_name,
+                'name' => $user->name,
                 'email' => $user->email,
                 'owner' => $user->owner,
-                'photo' => $user->photoUrl(['w' => 60, 'h' => 60, 'fit' => 'crop']),
+                // 'photo' => $user->photoUrl(['w' => 60, 'h' => 60, 'fit' => 'crop']),
                 'deleted_at' => $user->deleted_at,
             ],
         ]);
@@ -85,19 +86,20 @@ class UsersController extends Controller
         }
 
         Request::validate([
-            'first_name' => ['required', 'max:50'],
-            'last_name' => ['required', 'max:50'],
+            // 'first_name' => ['required', 'max:50'],
+            // 'last_name' => ['required', 'max:50'],
+            'name' => ['required', 'max:50'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable'],
             'owner' => ['required', 'boolean'],
-            'photo' => ['nullable', 'image'],
+            // 'photo' => ['nullable', 'image'],
         ]);
 
-        $user->update(Request::only('first_name', 'last_name', 'email', 'owner'));
+        $user->update(Request::only('name', 'email', 'owner'));
 
-        if (Request::file('photo')) {
-            $user->update(['photo_path' => Request::file('photo')->store('users')]);
-        }
+        // if (Request::file('photo')) {
+        //     $user->update(['photo_path' => Request::file('photo')->store('users')]);
+        // }
 
         if (Request::get('password')) {
             $user->update(['password' => Request::get('password')]);
