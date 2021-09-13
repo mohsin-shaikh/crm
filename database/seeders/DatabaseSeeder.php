@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Team;
 use App\Models\Account;
 use App\Models\Contact;
 use App\Models\Organization;
@@ -30,8 +31,12 @@ class DatabaseSeeder extends Seeder
             'owner' => true,
         ]);
 
-        $user::factory()->withPersonalTeam();
-
+        Team::factory()->create([
+            'name' => $user->name.'\'s Team',
+            'user_id' => $user->id,
+            'personal_team' => true
+        ]);
+               
         User::factory(5)->create(['account_id' => $account->id]);
 
         $organizations = Organization::factory(100)->create(['account_id' => $account->id]);
