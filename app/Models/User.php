@@ -36,7 +36,7 @@ class User extends Authenticatable implements AuthenticatableContract, Authoriza
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password', 'owner'
+        'name', 'email', 'password', 'owner', 'account_id'
     ];
 
     /**
