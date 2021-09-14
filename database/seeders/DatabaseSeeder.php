@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             // 'first_name' => 'John',
             // 'last_name' => 'Doe',
             'name' => 'Mohsin Shaikh',
-            'email' => 'mohsin.shaikh@zuupee.com',
+            'email' => 'admin@example.com',
             'account_id' => $account->id,
             'owner' => true,
         ]);

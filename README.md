@@ -69,8 +69,8 @@ php artisan serve
 
 You're ready to go! Visit Ping CRM in your browser, and login with:
 
-- **Username:** admin@zuupee.com
-- **Password:** secret
+- **Username:** admin@example.com
+- **Password:** Sample@1234
 
 ## Running tests
 
