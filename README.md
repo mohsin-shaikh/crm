@@ -67,14 +67,14 @@ Run the dev server (the output will give the address):
 php artisan serve
 ```
 
-You're ready to go! Visit Ping CRM in your browser, and login with:
+You're ready to go! Visit ZUUPEE CRM in your browser, and login with:
 
 - **Username:** admin@example.com
 - **Password:** Sample@1234
 
 ## Running tests
 
-To run the Ping CRM tests, run:
+To run the ZUUPEE CRM tests, run:
 
 ```
 phpunit
